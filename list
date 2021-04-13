@@ -1,0 +1,31 @@
+DB:
+    gg_user:
+        id,userName,userPw,nowHome
+    gg_score:
+        scoreId,userName,scores
+    gamehome:
+        id,maxplayer,nowplayer,score,maxturn,nowturn,playname,lastscore,end
+    onnumber:
+        id,onnumber,ontime,onuser
+session:
+    nameLogin
+    isLogin
+    new->homeLogin
+$schedule-> every 3s
+    exit:getnowHome->null;
+        Homeid->gamehome->playername:delete user
+        nowplayer-1
+
+GGHome:
+    get:
+        homeLogin = id
+        gg_user->nowHome = id
+        nowplyers = maxplayers
+    post:
+        if id->max == now
+            return a Timer
+            ajax = 上传成功
+            if Timer > 30:
+                return 超时,结束
+        else:
+            ajax = 等待齐
